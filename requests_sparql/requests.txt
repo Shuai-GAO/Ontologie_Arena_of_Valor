@@ -1,0 +1,184 @@
+﻿1. Qu’est-ce que l’on doit prendre comme équipements si l’on choisit Murad comme héros ?
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX heros:<http://www.semanticweb.org/noah/ontologies/2019/2/untitled-ontology-8#>
+
+SELECT ?EquipDeMurad
+WHERE { heros:Murad heros:utilise ?EquipDeMurad }
+
+
+2. De quel type est le héros Tulen ?
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX heros:<http://www.semanticweb.org/noah/ontologies/2019/2/untitled-ontology-8#>
+
+SELECT ?TypeDeTulen
+WHERE { heros:Tulen heros:Type ?TypeDeTulen }
+
+
+3. On voudrait jouer un guerrier de type finisseur. Que propose-t-elle ?
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX heros:<http://www.semanticweb.org/noah/ontologies/2019/2/untitled-ontology-8#>    
+
+SELECT ?guerrierFinisseur
+WHERE{
+?guerrierFinisseur rdf:type heros:Guerrier.
+?guerrierFinisseur heros:Type "Finisseur"
+}
+
+
+4. On voudrait choisir un héros de type mage qui ne soit pas si fragile (ne pas avoir un HP faible), est-ce qu’il existe ?
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX heros:<http://www.semanticweb.org/noah/ontologies/2019/2/untitled-ontology-8#>
+
+SELECT ?MageRobuste ?poise
+WHERE
+{ ?MageRobuste rdf:type heros:Mage.
+  ?MageRobuste heros:Poise ?poise
+FILTER regex(?poise, "moyen|assezFort|fort|tresFort")
+ }
+
+
+5. On veut choisir une héroïne de type mage. Que propose-t-elle ?
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX heros:<http://www.semanticweb.org/noah/ontologies/2019/2/untitled-ontology-8#>
+
+SELECT ?heroine
+WHERE
+{
+?heroine heros:Sexe "feminin".
+?heroine rdf:type heros:Mage .
+}
+
+
+6. On veut choisir un héros qui soit facile à manipuler. Que propose-t-elle ?
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX heros:<http://www.semanticweb.org/noah/ontologies/2019/2/untitled-ontology-8#>
+SELECT ?herosfacile
+
+WHERE
+{?herosfacile heros:Difficulty "facile" .
+}
+
+7. Est-ce que le héros Raz emprunte la voie de dragon ?
+  
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX heros:<http://www.semanticweb.org/noah/ontologies/2019/2/untitled-ontology-8#>    
+
+ASK
+{ heros:Raz heros:emprunte heros:voieDuDragon
+}
+
+
+8. Alice prend les bottes de paladin comme équipement. Est-ce que c’est correct ?
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX heros:<http://www.semanticweb.org/noah/ontologies/2019/2/untitled-ontology-8#>    
+
+ASK
+{ heros:Alice heros:utilise heros:Bottes_de_paladin
+}
+
+
+9. Le HP d’Arthur est-il supérieur à celui d’Annette ?
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX heros:<http://www.semanticweb.org/noah/ontologies/2019/2/untitled-ontology-8#>    
+
+ASK
+{
+heros:Arthur heros:BaseHP ?HPdeArthur.
+heros:Annette heros:BaseHP ?HPdeAnnette.
+FILTER(?HPdeArthur > ?HPdeAnnette)
+}
+
+
+10. Est-ce que tous les mages sont féminins ?
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX heros:<http://www.semanticweb.org/noah/ontologies/2019/2/untitled-ontology-8#>    
+
+ASK
+{ heros:Mage heros:sexe "feminin"
+}
+
+11. Existe-il un héros de type tank qui a une très forte “ability effects”?
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX heros:<http://www.semanticweb.org/noah/ontologies/2019/2/untitled-ontology-8#>    
+
+ASK
+{
+?tank rdf:type heros:Tank.
+?tank heros:AbilityEffects "tresFort"
+}
+
+
+12. Je voudrais savoir tous les héros de type Assassin dont le BaseHP dépasse 3300 et leurs niveau de difficulté.
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX heros:<http://www.semanticweb.org/noah/ontologies/2019/2/untitled-ontology-8#>    
+
+SELECT ?assassin ?HP ?difficulte
+{
+?assassin rdf:type heros:Assassin.
+?assassin heros:BaseHP ?HP.
+?assassin heros:Difficulty ?difficulte
+FILTER(?HP > 3300)
+}
+
+
+13. On voudrai choisir un héros de type tireur qui est facile à manipuler en regardant une liste montrant leur valeur de BaseAttack par ordre croissant.
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX heros:<http://www.semanticweb.org/noah/ontologies/2019/2/untitled-ontology-8#>    
+
+SELECT ?tireur ?difficulte ?attack
+{
+?tireur rdf:type heros:Tireur.
+?tireur heros:BaseAttack ?attack.
+?tireur heros:Difficulty ?difficulte.
+}
+ORDER BY ?attack
